@@ -1,7 +1,10 @@
 import React from 'react'
+import ProfilePanel from '@/components/ProfilePanel'
 
 export default function ProfilePage() {
   return (
-    <div>ProfilePage</div>
+    <div className='w-full h-full flex justify-center items-center'>
+      <ProfilePanel/>
+    </div>
   )
 }

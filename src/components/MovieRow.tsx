@@ -1,7 +1,11 @@
+"use client"
 import React from 'react'
 import { IMovie } from '@/interfaces/tmdbMovies.interface'
 import MovieCard from './MovieCard'
+import useEmblaCarousel from 'embla-carousel-react'
 import MovieRowControls from './MovieRowControls'
+
+
 
 interface MovieRowProps {
     movies: IMovie[]
@@ -9,26 +13,31 @@ interface MovieRowProps {
 }
 
 const MovieRow:React.FC<MovieRowProps> = ({movies, label}) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({dragFree: true})
   return (
-    <div className="space-y-2">
-      <p className="text-lg font-semibold px-4">{label}</p>
-      <MovieRowControls>
+
+    <div className="embla relative w-[90%] my-8">
+        <p className="text-lg font-semibold pb-4 pl-2">{label}</p>
+      <div className="embla__viewport  " ref={emblaRef}>
         <div 
           id="movie-row-container"
-          className="flex items-center space-x-4 overflow-x-hidden scroll-smooth"
+          className="embla__container"
         >
           {movies.map((movie) => (
-            <div key={movie.id} className="flex-none w-[200px]">
-              <MovieCard 
+              <MovieCard
+              key={movie.id} 
                 movieId={movie.id} 
                 title={movie.title} 
                 backdrop_path={movie.backdrop_path} 
+                release_date={movie.release_date}
               />
-            </div>
           ))}
         </div>
-      </MovieRowControls>
-    </div>
+      </div>
+      <MovieRowControls emblaApi={emblaApi}/>
+   </div>
+
+    
   )
 }
 

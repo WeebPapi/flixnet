@@ -2,9 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .mask-feather {
+    mask-image: radial-gradient(
+      circle at center,
+              /* Solid center reduced to 30% */
+        /* Added intermediate step */
+      rgba(0,0,0,0.5) 50%,  /* Added intermediate step */
+      transparent 70%   /* Starts fading earlier and more aggressively */
+    );
+    -webkit-mask-image: radial-gradient(
+      circle at center,
+      black 30%,
+      rgba(0,0,0,0.8) 40%,
+      rgba(0,0,0,0.5) 50%,
+      transparent 70%
+    );
+  }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
+  --background: #171717;
 }
 
 
@@ -12,5 +31,20 @@
 body {
   color: var(--foreground);
   background: var(--background);
-
+  width: 100%;
+  min-height: 100vh;
 }
+
+
+.embla__viewport {
+  overflow: hidden!important;
+}
+.embla__container {
+  display: flex!important;
+}
+.embla__slide {
+  flex: 0 0 16.66666667%!important;
+  margin: 0 0.35rem;
+  min-width: 0!important;
+}
+
